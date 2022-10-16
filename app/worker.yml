@@ -11,7 +11,7 @@ spec:
   source:
     path: ""
     repoURL: "https://adamhancockcg.github.io/swdb.helm"
-    targetRevision: 0.1.7
+    targetRevision: 0.1.8
     chart: worker
     helm:
       valueFiles:
