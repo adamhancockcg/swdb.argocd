@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: swdb
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  destinations:
+    - name: "*"
+      namespace: "*"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swdb-app-of-apps
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: swdb
+    server: "https://kubernetes.default.svc"
+  source:
+    path: apps
+    repoURL: "https://github.com/adamhancockcg/swdb.argocd.git"
+    targetRevision: HEAD
+  project: swdb
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

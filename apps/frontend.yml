@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swdb-frontend
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: swdb
+    server: "https://kubernetes.default.svc"
+  source:
+    path: ""
+    repoURL: "https://adamhancockcg.github.io/swdb.helm"
+    targetRevision: 0.1.6
+    chart: web
+    helm:
+      parameters:
+        - name: ingress.hosts[0].host
+          value: swdb.dev.localhost
+      valueFiles:
+        - /swdb-frontend-values.yaml
+  project: swdb
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: false
+      selfHeal: false

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: swdb-worker
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: swdb
+    server: "https://kubernetes.default.svc"
+  source:
+    path: ""
+    repoURL: "https://adamhancockcg.github.io/swdb.helm"
+    targetRevision: 0.1.7
+    chart: worker
+    helm:
+      valueFiles:
+        - /swdb-worker-values.yaml
+  project: swdb
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: false
+      selfHeal: true
