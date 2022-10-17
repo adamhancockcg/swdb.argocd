@@ -1,6 +1,6 @@
 # Argo CD demo
 
-ArgoCD manifests for SWDB - Star Wars Database.
+Argo CD manifests for SWDB - Star Wars Database.
 
 - [Application Code](https://github.com/adamhancockcg/swdb.app)
 - [Helm Charts](https://github.com/adamhancockcg/swdb.helm)
